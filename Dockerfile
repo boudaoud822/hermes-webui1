@@ -152,8 +152,11 @@ HEALTHCHECK --interval=30s --timeout=8s --start-period=10s --retries=3 \
 # before starting the WebUI server. The production image does not ship sudo.
 # Fix AIAgent not available: Install hermes-agent into python sys.path
 # Clone and install hermes-agent so it appears on sys.path
+# Clone and install hermes-agent
 RUN mkdir -p /.hermes && \
-    git clone https://github.com/nousresearch/hermes-agent.git /.hermes/hermes-agent && \
+    if [ ! -d "/.hermes/hermes-agent" ]; then \
+        git clone https://github.com/nousresearch/hermes-agent.git /.hermes/hermes-agent; \
+    fi && \
     /usr/local/bin/uv pip install --system -e /.hermes/hermes-agent
 USER root
 CMD ["/hermeswebui_init.bash"]
