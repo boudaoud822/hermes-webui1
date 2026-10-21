@@ -154,6 +154,7 @@ HEALTHCHECK --interval=30s --timeout=8s --start-period=10s --retries=3 \
 # Clone and install hermes-agent so it appears on sys.path
 # Clone and install hermes-agent
 # Clone and install hermes-agent directly into the app's virtual environment
+# Clone hermes-agent and install it directly inside the app environment
 RUN mkdir -p /.hermes && \
     if [ ! -d "/.hermes/hermes-agent" ]; then \
         git clone https://github.com/nousresearch/hermes-agent.git /.hermes/hermes-agent; \
