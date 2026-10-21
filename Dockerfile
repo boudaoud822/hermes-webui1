@@ -153,11 +153,12 @@ HEALTHCHECK --interval=30s --timeout=8s --start-period=10s --retries=3 \
 # Fix AIAgent not available: Install hermes-agent into python sys.path
 # Clone and install hermes-agent so it appears on sys.path
 # Clone and install hermes-agent
+# Clone and install hermes-agent directly into the app's virtual environment
 RUN mkdir -p /.hermes && \
     if [ ! -d "/.hermes/hermes-agent" ]; then \
         git clone https://github.com/nousresearch/hermes-agent.git /.hermes/hermes-agent; \
     fi && \
-    /usr/local/bin/uv pip install --system -e /.hermes/hermes-agent
+    /app/venv/bin/pip install -e /.hermes/hermes-agent
 USER root
 CMD ["/hermeswebui_init.bash"]
 
