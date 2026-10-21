@@ -151,7 +151,7 @@ HEALTHCHECK --interval=30s --timeout=8s --start-period=10s --retries=3 \
 # docker_init.bash performs root-only bind-mount setup, then drops to hermeswebui
 # before starting the WebUI server. The production image does not ship sudo.
 # Fix AIAgent not available: Install hermes-agent into python sys.path
-RUN /usr/local/bin/uv pip install --system -e .
+RUN cd /.hermes/hermes-agent && /usr/local/bin/uv pip install --system -e ..
 USER root
 CMD ["/hermeswebui_init.bash"]
 
